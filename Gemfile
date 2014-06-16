@@ -4,6 +4,11 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
 gem 'foundation-rails'
+gem 'cocoon'
+gem 'simple_form'
+gem 'haml'
+gem 'haml-rails'
+gem 'country_select'
 # Use sqlite3 as the database for Active Record
 group :development do
 	gem 'sqlite3'

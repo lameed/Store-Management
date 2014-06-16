@@ -1,0 +1,10 @@
+.nested-fields
+  .field
+    = f.label :title
+    %br
+    = f.text_field :title
+  .field
+    = f.label :description
+    %br
+    = f.text_area :description
+  = link_to_remove_association "remove subcategory", f

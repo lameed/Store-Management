@@ -1,0 +1,18 @@
+= simple_form_for @product do |f|
+  = f.input :title
+  = f.input :description
+  #submenu
+    %h3 Properties
+  #properties
+    = f.simple_fields_for :properties do |property|
+      = render 'property_fields', :f => property
+    .links
+      = link_to_add_association 'add property', f, :properties, :class => 'btn sign_in button'
+  #submenu      
+    %h3 Subcategories
+  #subcategories
+    = f.simple_fields_for :subcategories do |subcategory|
+      = render 'subcategory_fields', :f => subcategory
+    .links
+      = link_to_add_association 'add subcategory', f, :subcategories, :class => 'btn sign_in button'
+  = f.submit

@@ -1,6 +1,10 @@
-<h1>Listing products</h1>
-
-<table>
+<div id="submenu">
+  <h4 class="title">All Equipment</h4>
+</div>
+<div class="link_add large-12 columns">
+  <%= link_to 'Add Equipment', new_product_path, :class => 'btn sign_in button left' %>
+</div>
+<table class="large-12 columns">
   <thead>
     <tr>
       <th>Title</th>
@@ -12,11 +16,13 @@
   <tbody>
     <% @products.each do |product| %>
       <tr>
-        <td><%= product.title %></td>
+        <td><%= link_to product.title, product %></td>
         <td><%= product.description %></td>
-        <td><%= link_to 'Show', product %></td>
-        <td><%= link_to 'Edit', edit_product_path(product) %></td>
-        <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        
+        <td><%= link_to 'Edit', edit_product_path(product), :class => 'btn sign_in button' %></td>
+        <td><%= link_to "Subcategory", product, :class => 'btn sign_in button'  %></td>
+        <td><%= link_to "Properties", product, :class => 'btn sign_in button' %></td>
+        <td><%= link_to 'Delete', product, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn sign_in button' %></td>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +30,4 @@
 
 <br>
 
-<%= link_to 'New Product', new_product_path %>
+

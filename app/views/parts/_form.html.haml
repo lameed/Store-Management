@@ -1,0 +1,35 @@
+= simple_form_for @part do |f|
+  = f.association :product, label: 'Choose Equipment'
+  = f.input :title
+  = f.input :number
+  = f.input :image_url
+  = f.input :description
+  #submenu
+    %h3 Suppliers
+  #suppliers
+    = f.simple_fields_for :suppliers do |supplier|
+      = render 'supplier_fields', :f => supplier
+    .links
+      = link_to_add_association 'add supplier', f, :suppliers, :class => 'btn sign_in button'
+  #submenu
+    %h3 Manufacturers
+  #manufacturers
+    = f.simple_fields_for :manufacturers do |manufacturer|
+      = render 'manufacturer_fields', :f => manufacturer
+    .links
+      = link_to_add_association 'add manufacturer', f, :manufacturers, :class => 'btn sign_in button'
+  #submenu
+    %h3 Which Store
+  #stores
+    = f.simple_fields_for :stores do |store|
+      = render 'store_fields', :f => store
+    .links
+      = link_to_add_association 'add store', f, :stores, :class => 'btn sign_in button'
+  #submenu
+    %h3 Used for
+  #uses
+    = f.simple_fields_for :uses do |use|
+      = render 'use_fields', :f => use
+    .links
+      = link_to_add_association 'Add', f, :uses, :class => 'btn sign_in button'
+  = f.submit

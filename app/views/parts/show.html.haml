@@ -1,0 +1,35 @@
+#submenu
+  %h4= @part.title
+%p#notice= notice
+.large-2.columns
+  %h2 Part Detail
+  %p
+    %strong Title:
+    = @part.title
+  %p
+    %strong Number:
+    = @part.number
+  %p
+    %strong Image:
+    = @part.image_url
+  %p
+    %strong Description:
+    = @part.description
+  %p
+    %strong Equipment ID:
+    = @part.product_id
+.large-2.columns
+  %h2 Manufacturers
+  = render @part.manufacturers
+.large-2.columns
+  %h2 Suppliers
+  = render @part.suppliers
+.large-4.columns
+  %h2 Which Store
+  = render @part.stores
+.large-2.columns
+  %h2 used for
+  = render @part.uses
+.large-12.columns
+  = link_to 'Edit', edit_part_path(@part), :class => 'btn sign_in button left' | 
+  \#{link_to 'Back', parts_path, :class => 'btn sign_in button'}

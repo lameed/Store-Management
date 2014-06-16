@@ -1,0 +1,45 @@
+<div id="submenu">
+	<h4><%= @product.title %></h4>
+</div>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @product.title %>
+</p>
+<p>
+  <strong>Description:</strong>
+  <%= @product.description %>
+</p>
+
+<h2>Subcategories</h2>
+<% @article.subcategories.each do |comment| %>
+  <p>
+    <strong>Title:</strong>
+    <%= subcategory.title %>
+  </p>
+ 
+  <p>
+    <strong>description:</strong>
+    <%= subcategory.description %>
+  </p>
+  <hr>
+<% end %>
+
+<h2>Add Subcategory : </h2>
+<%= form_for ([@product, @product.subcategories.build]) do |f| %>
+	<p>
+	<%= f.label :title %> <br>
+	<f.text_field :title %>
+</p>
+<p>
+<%= f.label :description %><br>
+<%= f.text_area :description %>
+</p>
+<p>
+	<%= f.submit %>
+</p>
+<% end %>
+
+<%= link_to 'Edit', edit_product_path(@product) %> |
+<%= link_to 'Back', products_path %>

@@ -1,0 +1,20 @@
+%nav.top-bar{"data-topbar" => ""}
+  %ul.title-area
+    %li.name
+      %h1
+        %a{:href => "#"} Dextron IMS | 
+    / Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone
+    %li.toggle-topbar.menu-icon
+      %a{:href => "#"}
+        %span Menu
+  %section.top-bar-section
+    %ul.left
+      %li= link_to "EQUIPMENT", products_path
+      %li= link_to "PARTS", parts_path
+      %li= link_to "CONSUMABLES", "#"
+    %ul.right
+      %li.search
+        %form
+          %input{:type => "search"}
+      %li.has-button
+        %a.small.button{:href => "#"} Search

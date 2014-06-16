@@ -11,7 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140612132750) do
+ActiveRecord::Schema.define(version: 20140616093255) do
+
+  create_table "manufacturers", force: true do |t|
+    t.string   "name"
+    t.string   "country"
+    t.integer  "part_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "manufacturers", ["part_id"], name: "index_manufacturers_on_part_id"
+
+  create_table "parts", force: true do |t|
+    t.string   "title"
+    t.string   "number"
+    t.string   "image_url"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "product_id"
+  end
 
   create_table "products", force: true do |t|
     t.string   "title"
@@ -19,5 +39,57 @@ ActiveRecord::Schema.define(version: 20140612132750) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "properties", force: true do |t|
+    t.string   "name"
+    t.string   "value"
+    t.integer  "product_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "properties", ["product_id"], name: "index_properties_on_product_id"
+
+  create_table "stores", force: true do |t|
+    t.string   "name"
+    t.string   "location"
+    t.string   "store_keeper"
+    t.string   "quantity"
+    t.integer  "part_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "time_received"
+  end
+
+  add_index "stores", ["part_id"], name: "index_stores_on_part_id"
+
+  create_table "subcategories", force: true do |t|
+    t.integer  "product_id"
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "subcategories", ["product_id"], name: "index_subcategories_on_product_id"
+
+  create_table "suppliers", force: true do |t|
+    t.string   "name"
+    t.string   "country"
+    t.integer  "part_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "suppliers", ["part_id"], name: "index_suppliers_on_part_id"
+
+  create_table "uses", force: true do |t|
+    t.integer  "part_id"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "uses", ["part_id"], name: "index_uses_on_part_id"
 
 end

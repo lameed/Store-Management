@@ -7,9 +7,17 @@ class ProductsController < ApplicationController
     @products = Product.all
   end
 
+  def sub_index
+    @products = Product.all
+  end
+
   # GET /products/1
   # GET /products/1.json
   def show
+  end
+
+  def show_sub
+
   end
 
   # GET /products/new
@@ -69,6 +77,6 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:title, :description)
+      params.require(:product).permit(:title, :description, properties_attributes: [:id, :name, :value, :_destroy], subcategories_attributes: [:id, :title, :description, :_destroy])
     end
 end

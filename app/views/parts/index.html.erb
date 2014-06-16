@@ -1,0 +1,36 @@
+<div id="submenu">
+  <h4 class="title">All Parts</h4>
+</div>
+<div class="link_add large-12 columns">
+  <%= link_to 'Add Part', new_part_path, :class => 'btn sign_in button left' %>
+</div>
+<table class="large-12 columns">
+  <thead>
+    <tr>
+      <th>Image</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Part number</th>
+      <th>Equipment ID</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @parts.each do |part| %>
+      <tr>
+        <td><%= link_to part.image_url, part %></td>
+        <td><%= link_to part.title, part %></td>
+        <td><%= part.description %></td>
+        <td><%= link_to part.number, part %></td>
+        <td><%= part.product_id %></td>
+        <td><%= link_to 'Edit', edit_part_path(part), :class => 'btn sign_in button' %></td>
+        <td><%= link_to 'Delete', part, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn sign_in button' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+

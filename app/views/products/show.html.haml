@@ -1,0 +1,20 @@
+#submenu
+  %h4= @product.title
+%p#notice= notice
+.large-4.columns
+  %h2 Equipment
+  %p
+    %strong Title:
+    = @product.title
+  %p
+    %strong Description:
+    = @product.description
+.large-4.columns
+  %h2 Subcategories
+  = render @product.subcategories
+.large-4.columns
+  %h2 Properties
+  = render @product.properties
+.large-12.columns
+  = link_to 'Edit', edit_product_path(@product), :class => 'btn sign_in button left' | 
+  \#{link_to 'Back', products_path, :class => 'btn sign_in button'}

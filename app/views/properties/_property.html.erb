@@ -1,0 +1,12 @@
+<p>
+    <%= property.name %>
+</p>
+<p>
+    <%= property.value %>
+  </p>
+  <p>
+  <%= link_to 'Destroy property', [property.product, property],
+               method: :delete,
+               data: { confirm: 'Are you sure?' } %>
+</p>
+  <hr>
