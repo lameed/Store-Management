@@ -1,0 +1,12 @@
+%p#notice= notice
+.large-12.columns
+  %h2 Consumable Detail
+  %p
+    %strong Title:
+    = @consumable.name
+  %p
+    %strong Description:
+    = @consumable.description
+.large-12.columns
+  = link_to 'Edit', edit_consumable_path(@consumable), :class => 'btn sign_in button left' | 
+  \#{link_to 'Back', consumables_path, :class => 'btn sign_in button'}

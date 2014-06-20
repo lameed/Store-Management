@@ -1,0 +1,2 @@
+class ConsumableUsesController < ApplicationController
+end

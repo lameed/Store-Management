@@ -1,0 +1,32 @@
+<div id="submenu">
+  <h4 class="title">All Consumables</h4>
+</div>
+<div class="link_add large-12 columns">
+  <%= link_to 'Add Consumables', new_consumable_path, :class => 'btn sign_in button left' %>
+</div>
+<table class="large-12 columns">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @consumables.each do |consumable| %>
+      <tr>
+        <td><%= link_to consumable.id, consumable %></td>
+        <td><%= link_to consumable.name, consumable %></td>
+        <td><%= consumable.description %></td>
+        <td><%= link_to 'Edit', edit_consumable_path(consumable), :class => 'btn sign_in button' %></td>
+        <td><%= link_to 'Delete', consumable, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn sign_in button' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+

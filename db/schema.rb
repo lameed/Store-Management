@@ -11,7 +11,51 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140616093255) do
+ActiveRecord::Schema.define(version: 20140619224054) do
+
+  create_table "consumable_properties", force: true do |t|
+    t.string   "name"
+    t.string   "manufacturer"
+    t.string   "designer"
+    t.text     "description"
+    t.datetime "date_ordered"
+    t.datetime "date_supplied"
+    t.string   "unit_weight"
+    t.string   "length"
+    t.string   "drawing"
+    t.integer  "consumable_subcategory_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "consumable_properties", ["consumable_subcategory_id"], name: "index_consumable_properties_on_consumable_subcategory_id"
+
+  create_table "consumable_subcategories", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "consumable_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "consumable_subcategories", ["consumable_id"], name: "index_consumable_subcategories_on_consumable_id"
+
+  create_table "consumable_uses", force: true do |t|
+    t.text     "project"
+    t.text     "comment"
+    t.integer  "consumable_subcategory_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "consumable_uses", ["consumable_subcategory_id"], name: "index_consumable_uses_on_consumable_subcategory_id"
+
+  create_table "consumables", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "manufacturers", force: true do |t|
     t.string   "name"
@@ -22,6 +66,16 @@ ActiveRecord::Schema.define(version: 20140616093255) do
   end
 
   add_index "manufacturers", ["part_id"], name: "index_manufacturers_on_part_id"
+
+  create_table "part_subcategories", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "consumable_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "part_subcategories", ["consumable_id"], name: "index_part_subcategories_on_consumable_id"
 
   create_table "parts", force: true do |t|
     t.string   "title"

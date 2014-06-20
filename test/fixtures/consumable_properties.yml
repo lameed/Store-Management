@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  manufacturer: MyString
+  designer: MyString
+  description: MyText
+  date_ordered: 2014-06-19 23:23:29
+  date_supplied: 2014-06-19 23:23:29
+  unit_weight: MyString
+  length: MyString
+  drawing: MyString
+  consumable_subcategory_id: 
+
+two:
+  name: MyString
+  manufacturer: MyString
+  designer: MyString
+  description: MyText
+  date_ordered: 2014-06-19 23:23:29
+  date_supplied: 2014-06-19 23:23:29
+  unit_weight: MyString
+  length: MyString
+  drawing: MyString
+  consumable_subcategory_id: 
