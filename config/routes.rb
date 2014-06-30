@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :line_items
+
+  resources :requests
+
+  get 'store/index'
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   resources :products do
     resources :subcategories
@@ -69,5 +75,5 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-  root 'products#index'
+  root 'store#index' , :as => 'store'
 end

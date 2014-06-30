@@ -1,4 +1,5 @@
 class Part < ActiveRecord::Base
+	
 	belongs_to :product
 	has_many :manufacturers
 	has_many :suppliers
@@ -8,4 +9,6 @@ class Part < ActiveRecord::Base
 	accepts_nested_attributes_for :suppliers, :reject_if => :all_blank, :allow_destroy => true
 	accepts_nested_attributes_for :stores, :reject_if => :all_blank, :allow_destroy => true
 	accepts_nested_attributes_for :uses, :reject_if => :all_blank, :allow_destroy => true
+
+	mount_uploader :image_url, CarrierwaveUploader
 end

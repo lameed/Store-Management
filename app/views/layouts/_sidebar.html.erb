@@ -1,0 +1,21 @@
+<div id ="admin_sidebar" class="large-2 columns hide-for-small">
+  <div class="large-12 columns">
+  <%= @products.each do |product| %> 
+   <ul class= "side-nav">
+
+      
+      <li class="divider"></li>
+      <li>
+        <%= product.title %>
+        <ul>
+        <%= @subcategories.each do |subcategory| %>
+        <li><%= subcategory.name %></li>
+        <% end %>
+        </ul>
+        </li>
+      <li class="divider"></li>
+     
+      </ul>
+       <% end %>
+      </div>
+      </div>

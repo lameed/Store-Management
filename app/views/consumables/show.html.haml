@@ -7,6 +7,11 @@
   %p
     %strong Description:
     = @consumable.description
+/ .large-2.columns
+/   %h2 SUbcategories
+/   = render @consumable.consumable_subcategories
+/ .large-2.columns
+/   %h2 used for
+/   = render @consumable.consumable_uses
 .large-12.columns
-  = link_to 'Edit', edit_consumable_path(@consumable), :class => 'btn sign_in button left' | 
-  \#{link_to 'Back', consumables_path, :class => 'btn sign_in button'}
+  = link_to 'Back', consumables_path, :class => 'btn sign_in button left'

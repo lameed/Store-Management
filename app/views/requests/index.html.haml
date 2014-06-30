@@ -1,0 +1,9 @@
+%h1 Listing requests
+
+%table
+  %tr
+    %th
+
+  - for item in @request.line_items each
+    %tr
+      %td= item.product.title

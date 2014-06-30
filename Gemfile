@@ -10,6 +10,10 @@ gem 'haml'
 gem 'haml-rails'
 gem 'country_select'
 gem 'rails_admin'
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'cancan'
+gem 'devise'
 # Use sqlite3 as the database for Active Record
 group :development do
 	gem 'sqlite3'

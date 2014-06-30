@@ -8,6 +8,6 @@ class ConsumablePropertiesController < ApplicationController
  
   private
     def consumable_property_params
-      params.require(:consumable_property).permit(:id, :name, :manufacturer, :designer, :description, :date_ordered, :date_supplied, :unit_weight, :length, :drawing)
+      params.require(:consumable_property).permit(:id, :name, :manufacturer, :designer, :description, :date_ordered, :date_supplied, :unit_weight, :length, :drawing, :drawing_cache, :remove_drawing)
     end
 end

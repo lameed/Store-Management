@@ -3,7 +3,7 @@ class PartsController < ApplicationController
 
 	def index
     	@parts = Part.all
-    	@product = Product.all
+    	@products = Product.all
     end
 
   	def show
@@ -58,6 +58,6 @@ private
       @product = Product.find(params[:id])
     end
    def part_params
-      params.require(:part).permit(:product_id, :title, :description, :number, :image_url, manufacturers_attributes: [:id, :name, :country, :_destroy], suppliers_attributes: [:id, :name, :country, :_destroy],  stores_attributes: [:id, :name, :location, :store_keeper, :quantity, :time_received, :_destroy], uses_attributes: [:id, :description, :_destroy])
+      params.require(:part).permit(:product_id, :title, :description, :number, :image_url, :image_url_cache, :remove_image_url, manufacturers_attributes: [:id, :name, :country, :_destroy], suppliers_attributes: [:id, :name, :country, :_destroy],  stores_attributes: [:id, :name, :location, :store_keeper, :quantity, :time_received, :_destroy], uses_attributes: [:id, :description, :_destroy])
     end
 end
