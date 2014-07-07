@@ -1,7 +1,10 @@
 <div id="submenu">
   <h4 class="title">All Equipment</h4>
 </div>
-
+<div id="notice"><%= notice %></div>
+<div id= "request" class= "right">
+<%= render @request %>
+</div>
 <table class="large-12 columns">
   <thead>
     <tr>
@@ -18,7 +21,7 @@
         <td><%= link_to product.id, product %></td>
         <td><%= link_to product.title, product %></td>
         <td><%= sanitize product.description %></td>
-        <td><%= button_to "Make Request", line_items_path(:product_id => product), :class => 'btn sign_in button' %></td>
+        <td><%= button_to "Add to Request", line_items_path(:product_id => product), :class => 'btn sign_in button', :remote => true %></td>
       </tr>
     <% end %>
   </tbody>

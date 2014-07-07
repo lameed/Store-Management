@@ -8,8 +8,15 @@
   </ul>
 
   <section class="top-bar-section">
+  <ul class="right">
+     <li><%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>
+        <li><%= link_to current_user.email, edit_user_registration_path  %>
+      
+        </li>
+
+    </ul>
     <!-- Right Nav Section -->
-    <ul class="left">
+    <ul class="right">
       <li class="has-dropdown">
       <%= link_to "Equipments", products_path %>
       <ul class="dropdown">
@@ -38,8 +45,6 @@
     </ul>
 
     <!-- Left Nav Section -->
-    <ul class="right">
-      <li><a href="#">User Email</a></li>
-    </ul>
+    
   </section>
 </nav>

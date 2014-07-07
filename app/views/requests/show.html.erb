@@ -1,10 +1,10 @@
-<p class="notice"><%= notice %>
-<h1> Listing requests</h1>
 
-<ul>
-  <%- for item in @request.line_items %>
-    <li><%= item.quantity %> &times; <%=item.product.title %></li>
+<h4> Your requests</h4>
 
-    <% end %>
- </ul>
+<table>
+  <%= render(@request.line_items) %>
+    
+
+   
+ </table>
  <%= button_to 'Empty Rquest', @request, :method => :delete, :confirm => 'Are you sure?' %>

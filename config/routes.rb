@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :orders
+
+  devise_for :users
   resources :line_items
 
   resources :requests
@@ -9,6 +12,7 @@ Rails.application.routes.draw do
   resources :products do
     resources :subcategories
     resources :properties
+    get :who_bought, :on => :member
   end
 
   resources :parts
@@ -75,5 +79,5 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-  root 'store#index' , :as => 'store'
+  root 'products#index' , :as => 'Equipment'
 end

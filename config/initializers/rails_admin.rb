@@ -1,4 +1,10 @@
 RailsAdmin.config do |config|
+config.excluded_models << "Request"
+config.excluded_models << "LineItem"
+config.authenticate_with do
+    warden.authenticate! scope: :user
+  end
+  config.current_user_method &:current_user
 
   ### Popular gems integration
 
@@ -68,4 +74,6 @@ end
 config.model 'Consumable use' do
   parent Consumable subcategory
 end
+
+
 end

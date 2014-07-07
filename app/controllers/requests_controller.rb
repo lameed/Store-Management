@@ -70,7 +70,7 @@ class RequestsController < ApplicationController
     session[:request_id] = nil
 
     respond_to do |format|
-      format.html { redirect_to products_url, notice: 'Your request is currently empty.' }
+      format.html { redirect_to products_url }
       format.json { head :ok }
     end
   end

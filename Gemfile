@@ -53,4 +53,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin]
 group :production do
 	gem 'pg', '0.12.2'
 	gem 'rails_12factor'
+	gem 'thin'
 end
