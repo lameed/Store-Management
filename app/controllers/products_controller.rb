@@ -4,12 +4,12 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @products = Product.all
+    @products = Product.search(params[:search]).order(:title).page params[:page]
     @request = current_request
   end
 
   def sub_index
-    @products = Product.all
+    @products = Product.search(params[:search]).all
   end
 
   # GET /products/1
@@ -17,8 +17,10 @@ class ProductsController < ApplicationController
   def show
   end
 
-  def show_sub
 
+
+  def show_subcategory
+     @product = Product.find(params[:id])
   end
 
   # GET /products/new

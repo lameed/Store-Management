@@ -1,4 +1,4 @@
-= form_for @order do |f|
+= simple_form_for @order do |f|
   - if @order.errors.any?
     #error_explanation
       %h2= "#{pluralize(@order.errors.count, "error")} prohibited this order from being saved:"
@@ -12,5 +12,8 @@
   .field
     = f.label :email
     = f.text_field :email
+  .field
+    = f.label :date_needed
+    = f.text_field :date_needed, as: :datetime
   .actions
     = f.submit 'Save', :class => 'btn sign_in button'

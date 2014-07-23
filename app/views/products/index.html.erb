@@ -5,6 +5,17 @@
 <div id= "request" class= "right">
 <%= render @request %>
 </div>
+<%= form_tag products_path, :method => 'get' do %>
+  <table class="large-3 columns">
+    <tr>
+      <td class="small-10 columns">
+    <%= text_field_tag :search, params[:Search], :class => 'left' %>
+  </td>
+  <td class="small-2 columns">
+    <%= submit_tag 'Search', :title => nil, :class => 'btn sign_in button left right' %>
+  </td></tr>
+</table>
+  <% end %>
 <table class="large-12 columns">
   <thead>
     <tr>
@@ -22,11 +33,14 @@
         <td><%= link_to product.title, product %></td>
         <td><%= sanitize product.description %></td>
         <td><%= button_to "Add to Request", line_items_path(:product_id => product), :class => 'btn sign_in button', :remote => true %></td>
+        <!-- <td><%= link_to "Subcategory", products_show_subcategory_path, :class => 'btn sign_in button' %></td> -->
       </tr>
     <% end %>
   </tbody>
 </table>
-
+<div class="large-12 columns">
+<%= paginate @products %>
+</div>
 <br>
 
 

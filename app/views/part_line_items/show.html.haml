@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Part:
+  = @part_line_item.part_id
+%p
+  %b Part request:
+  = @part_line_item.part_request_id
+
+= link_to 'Edit', edit_part_line_item_path(@part_line_item)
+\|
+= link_to 'Back', part_line_items_path

@@ -1,15 +1,14 @@
-<p>
-    <strong>Title:</strong>
-    <%= subcategory.title %>
-  </p>
+
+
+  
+
+
+   
+      <tr>
+        <td><%= subcategory.id %></td>
+        <td><%= subcategory.title %></td>
+        <td><%= sanitize subcategory.description %></td>
+       
+      </tr>
+  
  
-  <p>
-    <strong>description:</strong>
-    <%= subcategory.description %>
-  </p>
-  <p>
-  <%= link_to 'Destroy subcategory', [subcategory.product, subcategory],
-               method: :delete,
-               data: { confirm: 'Are you sure?' } %>
-</p>
-  <hr>

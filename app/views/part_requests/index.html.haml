@@ -1,0 +1,17 @@
+%h1 Listing part_requests
+
+%table
+  %tr
+    %th
+    %th
+    %th
+
+  - @part_requests.each do |part_request|
+    %tr
+      %td= link_to 'Show', part_request
+      %td= link_to 'Edit', edit_part_request_path(part_request)
+      %td= link_to 'Destroy', part_request, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Part request', new_part_request_path

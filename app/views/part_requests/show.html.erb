@@ -1,0 +1,11 @@
+<p><div id = "notice"><%= notice %></div>
+<h2>Your Request</h2>
+<table>
+<%= render(@part_request.part_line_items) %>
+
+
+</table>
+
+<%= button_to 'Empty Requests', @part_request, :method => :delete,
+:confirm => 'Are you sure?', :class => 'btn sign_in button' %>|
+

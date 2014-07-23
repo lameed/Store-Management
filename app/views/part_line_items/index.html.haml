@@ -1,0 +1,21 @@
+%h1 Listing part_line_items
+
+%table
+  %tr
+    %th Part
+    %th Part request
+    %th
+    %th
+    %th
+
+  - @part_line_items.each do |part_line_item|
+    %tr
+      %td= part_line_item.part_id
+      %td= part_line_item.part_request_id
+      %td= link_to 'Show', part_line_item
+      %td= link_to 'Edit', edit_part_line_item_path(part_line_item)
+      %td= link_to 'Destroy', part_line_item, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Part line item', new_part_line_item_path

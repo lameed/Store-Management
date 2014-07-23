@@ -1,6 +1,10 @@
 RailsAdmin.config do |config|
+#config.authorize_with :cancan
 config.excluded_models << "Request"
 config.excluded_models << "LineItem"
+config.excluded_models << "PartLineItem"
+config.excluded_models << "PartRequest"
+
 config.authenticate_with do
     warden.authenticate! scope: :user
   end
@@ -44,13 +48,22 @@ end
 config.model 'Property' do
   parent Product
 end
+config.model 'Order' do
+  parent Product
+  weight -1
+end
 config.model 'Product' do
   navigation_label 'Product'
-  weight -2
+  weight -3
 end
 
 config.model 'Part' do
   navigation_label 'Parts'
+  weight -2
+end
+
+config.model 'Consumable' do
+  navigation_label 'Consumables'
   weight -1
 end
 config.model 'Store' do
@@ -65,14 +78,14 @@ end
 config.model 'Use' do
   parent Part
 end
-config.model 'Consumable subcategory' do
+config.model 'ConsumableSubcategory' do
   parent Consumable
 end
-config.model 'Consumable property' do
-  parent Consumable subcategory
+config.model 'ConsumableProperty' do
+  parent ConsumableSubcategory
 end
-config.model 'Consumable use' do
-  parent Consumable subcategory
+config.model 'ConsumableUse' do
+  parent ConsumableSubcategory
 end
 
 

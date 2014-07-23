@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :part_line_items
+
+  resources :part_requests
+
   resources :orders
 
   devise_for :users
@@ -22,6 +26,7 @@ Rails.application.routes.draw do
   post "parts/new"
   get "parts/edit"
   post "parts/create"
+  get "products/show_subcategory"
 
    resources :consumables
 

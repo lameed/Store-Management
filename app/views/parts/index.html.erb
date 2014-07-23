@@ -1,37 +1,42 @@
 <div id="submenu">
   <h4 class="title">All Parts</h4>
 </div>
-
-<table class="large-12 columns">
-  <thead>
+<div id= "request" class= "right">
+<%= render @part_request %>
+</div>
+<%= form_tag parts_path, :method => 'get' do %>
+  <table class="large-3 columns">
     <tr>
-      <th>ID</th>
-      <th>Image</th>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Part number</th>
-      <th>Equipment Type</th>
-      <th colspan="1"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @parts.each do |part| %>
-      <tr>
-        <td><%= link_to part.id, part %></td>
-        <td><%= link_to part.image_url, part %></td>
-        <td><%= link_to part.title, part %></td>
-        <td><%= part.description %></td>
-        <td><%= link_to part.number, part %></td>
-        <td><%= part.product.title %></td>
-        
-        <td><%= link_to 'Full Details', part, :class => 'btn sign_in button' %></td>
-        
-      </tr>
-    <% end %>
-  </tbody>
+      <td class="small-10 columns">
+    <%= text_field_tag :search, params[:Search], :class => 'left' %>
+  </td>
+  <td class="small-2 columns">
+    <%= submit_tag 'Search', :title => nil, :class => 'btn sign_in button left right' %>
+  </td></tr>
 </table>
+  <% end %>
+<div class = "large-12 columns">
 
+    <% @parts.each do |part| %>
+<div id = "list large-12 columns">
+  <div class = "large-3 columns left">
+       <!--  <%= link_to part.id, part %> -->
+       <p> <%= link_to image_tag(part.image_url, :class => "imgg"), part %><br/>
+        <strong><%= link_to part.title, part %></strong><br/>
+        <%= sanitize(part.description) %><br/>
+        <strong> Part No. : </strong><%= link_to part.number, part %><br/>
+      <strong>Type of Equipment : </strong> <%= part.product.title %>
+        
+        <br/><br/><p><%= link_to 'Full Details', part, :class => 'btn sign_in button left' %>  
+        <%= button_to 'Add to Request', part_line_items_path(:part_id => part), :class => 'btn sign_in button two', :remote => true %></p>
+      </p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<div class="large-12 columns">
+<%= paginate @parts %>
+</div>
 <br>
 
 

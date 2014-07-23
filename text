@@ -1,0 +1,148 @@
+In your controller
+
+def index
+  @q = Person.search(params[:q])
+  @people = @q.result(distinct: true)
+end
+or without distinct:true, for sorting on an associated table's columns (in this example, with preloading each Person's Articles and pagination):
+
+def index
+  @q = Person.search(params[:q])
+  @people = @q.result.includes(:articles).page(params[:page])
+end
+In your view
+
+The two primary Ransack view helpers are search_form_for and sort_link, which are defined in Ransack::Helpers::FormHelper.
+
+Ransack's search_form_for helper replaces form_for for creating the view search form:
+
+<%= search_form_for @q do |f| %>
+  <%= f.label :name_cont %>
+  <%= f.search_field :name_cont %>
+  <%= f.label :articles_title_start %>
+  <%= f.search_field :articles_title_start %>
+  <%= f.submit %>
+<% end %>
+cont (contains) and start (starts with) are just two of the available search predicates. See Constants for a full list and the wiki for more information.
+
+The search_form_for answer format can be set like this:
+
+<%= search_form_for(@q, format: :pdf) do |f| %>
+
+<%= search_form_for(@q, format: :json) do |f| %>
+Ransack's sort_link helper is useful for creating table headers that are sortable links:
+
+<%= content_tag :th, sort_link(@q, :name) %>
+Additional options can be passed after the column attribute, like a different column title or a default sort order:
+
+<%= content_tag :th, sort_link(@q, :name, 'Last Name', default_order: :desc) %>
+Advanced Mode
+
+"Advanced" searches (ab)use Rails' nested attributes functionality in order to generate complex queries with nested AND/OR groupings, etc. This takes a bit more work but can generate some pretty cool search interfaces that put a lot of power in the hands of your users. A notable drawback with these searches is that the increased size of the parameter string will typically force you to use the HTTP POST method instead of GET. :(
+
+This means you'll need to tweak your routes...
+
+resources :people do
+  collection do
+    match 'search' => 'people#search', via: [:get, :post], as: :search
+  end
+end
+... and add another controller action ...
+
+def search
+  index
+  render :index
+end
+... and update your search_form_for line in the view ...
+
+<%= search_form_for @q, url: search_people_path,
+                        html: { method: :post } do |f| %>
+Once you've done so, you can make use of the helpers in Ransack::Helpers::FormBuilder to construct much more complex search forms, such as the one on the demo page (source code here).
+
+Ransack #search method
+
+Ransack will try to to make #search available in your models, but in the case that #search has already been defined, you can use #ransack instead. For example the following would be equivalent:
+
+Article.search(params[:q])
+Article.ransack(params[:q])
+has_many and belongs_to associations
+
+You can easily use Ransack to search in associated objects.
+
+Given you have these associations ...
+
+class Employee < ActiveRecord::Base
+  belongs_to :supervisor
+
+  # has attribute last_name:string
+end
+
+class Department < ActiveRecord::Base
+  has_many :supervisors
+
+  # has attribute title:string
+end
+
+class Supervisor < ActiveRecord::Base
+  belongs_to :department
+  has_many :employees
+
+  # has attribute last_name:string
+end
+... and a controller ...
+
+class SupervisorsController < ApplicationController
+  def index
+    @search = Supervisor.search(params[:q])
+    @supervisors = @search.result.includes(:department, :employees)
+  end
+end
+... you might set up your form like this ...
+
+<%= search_form_for @search do |f| %>
+  <%= f.label :last_name_cont %>
+  <%= f.search_field :last_name_cont %>
+
+  <%= f.label :department_title_cont %>
+  <%= f.search_field :department_title_cont %>
+
+  <%= f.label :employees_last_name_cont %>
+  <%= f.search_field :employees_last_name_cont %>
+
+  <%= f.submit "search" %>
+<% end %>
+...
+<%= content_tag :table %>
+  <%= content_tag :th, sort_link(@q, :last_name) %>
+  <%= content_tag :th, sort_link(@q, 'departments.title') %>
+  <%= content_tag :th, sort_link(@q, 'employees.last_name') %>
+<% end %>
+Using Ransackers to add custom search functions via Arel
+
+The main premise behind Ransack is to provide access to Arel predicate methods. Ransack provides special methods, called ransackers, for creating additional search functions via Arel. More information about ransacker methods can be found here in the wiki. Feel free to contribute working ransacker code examples to the wiki!
+
+Using SimpleForm
+
+If you want to combine form builders of ransack and SimpleForm, just set the RANSACK_FORM_BUILDER environment variable before Rails started, e.g. in config/application.rb before require 'rails/all' and of course use gem 'simple_form' in your Gemfile:
+
+require File.expand_path('../boot', __FILE__)
+
+ENV['RANSACK_FORM_BUILDER'] = '::SimpleForm::FormBuilder'
+
+require 'rails/all'
+Authorization
+
+By default, Ransack exposes search for any model column, so take care to sanitize params and only pass allowed keys. Alternately, you can define these methods on your model classes to apply selective authorization based on a given auth object:
+
+def ransackable_attributes(auth_object = nil)
+def ransackable_associations(auth_object = nil)
+def ransackable_scopes(auth_object = nil)
+def ransortable_attributes(auth_object = nil) (for sorting)
+Any values not included in the arrays returned from these methods will be ignored. The auth object should be optional when building the search, and is ignored by default:
+
+Employee.search({ salary_gt: 100000 }, { auth_object: current_user })
+Scopes
+
+Searching by scope requires defining a whitelist of ransackable_scopes on the model class. By default all class methods (e.g. scopes) are ignored. Scopes will be applied for matching true values, or for given values if the scope accepts a value:
+
+Employee.search({ active: true, hired_since: '2013-01-01' })

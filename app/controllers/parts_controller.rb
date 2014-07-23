@@ -2,8 +2,9 @@ class PartsController < ApplicationController
 	 before_action :set_product, only: [:show, :edit, :update, :destroy]
 
 	def index
-    	@parts = Part.all
+    	@parts = Part.search(params[:search]).order(:title).page params[:page]
     	@products = Product.all
+      @part_request = current_part_request
     end
 
   	def show

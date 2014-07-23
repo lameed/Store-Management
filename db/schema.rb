@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140705090223) do
+ActiveRecord::Schema.define(version: 20140717174819) do
 
   create_table "consumable_properties", force: true do |t|
     t.string   "name"
@@ -79,6 +79,20 @@ ActiveRecord::Schema.define(version: 20140705090223) do
   create_table "orders", force: true do |t|
     t.string   "name"
     t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "date_needed"
+  end
+
+  create_table "part_line_items", force: true do |t|
+    t.integer  "part_id"
+    t.integer  "part_request_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "quantity",        default: 1
+  end
+
+  create_table "part_requests", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end

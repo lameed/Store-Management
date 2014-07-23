@@ -13,7 +13,9 @@
 
   <body>
  <div id="container">
+   <% if user_signed_in? %>
    <%= render 'layouts/nav' %>
+
    <div class="clear"></div>
    
    <div id="content">
@@ -25,8 +27,9 @@
     </div>
   </div>
 </div>
-
-
+ <% else %>
+   <%= yield %>
+   <% end %>
     <%= javascript_include_tag "application" %>
   </body>
 </html>

@@ -1,14 +1,39 @@
-<p id="notice"><%= notice %></p>
-
+<div id=  "submenu">
+  <h4> <%= @product.title %>
 <p>
-  <strong>Title:</strong>
-  <%= @product.title %>
+<div id = "notice"> 
+  <%= notice %>
+</div>
 </p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @product.description %>
-</p>
-
-<%= link_to 'Edit', edit_product_path(@product) %> |
-<%= link_to 'Back', products_path %>
+<div class = "large-12 columns">
+  <h2> Equipment</h2>
+  <p>
+    <strong> Title: </strong>
+    <%= @product.title %>
+  <p>
+    <strong> Description: </strong>
+    <%= @product.description %>
+    </p>
+<div class = "large-8 columns">
+  <h2> Subcategories</h2>
+  <table class="large-12 columns">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Description</th>
+      
+    </tr>
+  </thead>
+    <tbody>
+  <%= render @product.subcategories %>
+   </tbody>
+</table>
+</div>
+<div class = "large-4 columns">
+  <h2> Properties </h2>
+  <%= render @product.properties %>
+  </div>
+<div class= "large-12 columns">
+  <%= link_to 'Back', products_path, :class => 'btn sign_in button left' %>
+  </div>

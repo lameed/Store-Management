@@ -1,12 +1,13 @@
 class Product < ActiveRecord::Base
+	
+	paginates_per 1
 	has_many :subcategories
 	has_many :properties
 	has_many :parts, dependent: :destroy
 	has_many :line_items
 	has_many :orders, :through => :line_items
 	before_destroy :ensure_not_referenced_by_any_line_item
-	accepts_nested_attributes_for :subcategories, :reject_if => :all_blank, :allow_destroy => true
-	accepts_nested_attributes_for :properties, :reject_if => :all_blank, :allow_destroy => true
+	
 	validates :title, presence: true
 
 	def ensure_not_referenced_by_any_line_item
@@ -15,6 +16,14 @@ class Product < ActiveRecord::Base
 		else
 			errors[:base] << "Line Items present"
 			return false
+		end
+	end
+
+	def self.search(search)
+		if search
+			where('title Like ?' , "%#{search}%")
+		else
+			all
 		end
 	end
 end

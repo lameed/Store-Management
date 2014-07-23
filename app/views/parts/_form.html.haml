@@ -1,4 +1,4 @@
-= simple_form_for @part do |f|
+= simple_form_for @part :html => {:multipart => true } do |f|
   = f.association :product, label: 'Choose Equipment'
   = f.input :title
   = f.input :number

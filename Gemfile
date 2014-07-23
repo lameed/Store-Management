@@ -14,6 +14,9 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'cancan'
 gem 'devise'
+gem "ransack", github: "activerecord-hackery/ransack", branch: "rails-4.1"
+
+gem 'kaminari'
 # Use sqlite3 as the database for Active Record
 group :development do
 	gem 'sqlite3'

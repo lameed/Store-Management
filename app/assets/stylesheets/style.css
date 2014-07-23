@@ -35,3 +35,15 @@ font-size: 2.0625rem;
 #request { 
 	width: 250px;
 }
+
+.imgg {
+	width: 450px;
+	height: 250px;
+	border: 5px solid #ccc;
+margin-bottom: 5px;
+}
+.two {
+	margin-left: 65px;
+}
+a:visited {
+color: #333;
